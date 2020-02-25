@@ -36,7 +36,7 @@ def apply_template!
   run_with_clean_bundler_env "bin/rails g cucumber:install"
   run_with_clean_bundler_env "bin/rails g rspec:install"
 
-  binstubs = %w[brakeman bundler cucumber rubocop rspec]
+  binstubs = %w[brakeman bundler cucumber rubocop]
   run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
 
   template "rubocop.yml.tt", ".rubocop.yml"
