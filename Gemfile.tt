@@ -26,7 +26,6 @@ group :development do
   gem "listen"<%= gemfile_requirement("listen") %>
   gem "pry-rails" # A much better console than IRB
   gem "rubocop-rails", require: false
-  gem "simplecov", require: false
   gem "spring"
 <% if gemfile_requirement("spring-watcher-listen") -%>
   gem "spring-watcher-listen"<%= gemfile_requirement("spring-watcher-listen") %>
