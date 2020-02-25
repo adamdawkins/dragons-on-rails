@@ -24,7 +24,6 @@ def apply_template!
   apply "app/template.rb"
   apply "bin/template.rb"
   apply "config/template.rb"
-  apply "test/template.rb"
 
   git :init unless preexisting_git_repo?
   empty_directory ".git/safe"
