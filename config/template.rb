@@ -17,5 +17,8 @@ apply "config/environments/development.rb"
 apply "config/environments/production.rb"
 apply "config/environments/test.rb"
 
+prepend_to_file "config/routes.rb" do
+%(require "sidekiq/web"\n\n)
+end
 route 'root "home#index"'
 route %Q(mount Sidekiq::Web => "/sidekiq" # monitoring console\n)
