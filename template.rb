@@ -66,7 +66,7 @@ def add_template_repository_to_source_path
     at_exit { FileUtils.remove_entry(tempdir) }
     git clone: [
       "--quiet",
-      "https://adamdawkins@bitbucket.org/dragondropdevelopment/dragons-on-rails.git",
+      "https://github.com/adamdawkins/dragons-on-rails.git",
       tempdir
     ].map(&:shellescape).join(" ")
 
