@@ -18,7 +18,6 @@ def apply_template!
 
   copy_file "Procfile"
 
-  apply "config.ru.rb"
   apply "app/template.rb"
   apply "bin/template.rb"
   apply "config/template.rb"
@@ -34,7 +33,7 @@ def apply_template!
   create_initial_migration
   generate_spring_binstubs
 
-  binstubs = %w[ annotate brakeman bundler bundler-audit rubocop sidekiq ]
+  binstubs = %w[brakeman bundler rubocop]
   run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
 
   template "rubocop.yml.tt", ".rubocop.yml"
