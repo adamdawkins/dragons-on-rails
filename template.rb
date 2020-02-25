@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 require "bundler"
-RAILS_REQUIREMENT = "~> 6.0.0".freeze
+
+RAILS_REQUIREMENT = "~> 6.0.0"
 
 def apply_template!
   assert_minimum_rails_version
