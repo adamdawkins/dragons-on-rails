@@ -13,14 +13,11 @@ def apply_template!
   remove_file "README.rdoc"
 
   template "example.env.tt"
-  copy_file "editorconfig", ".editorconfig"
   copy_file "gitignore", ".gitignore", force: true
   template "ruby-version.tt", ".ruby-version", force: true
 
-  copy_file "Guardfile"
   copy_file "Procfile"
 
-  apply "Rakefile.rb"
   apply "config.ru.rb"
   apply "app/template.rb"
   apply "bin/template.rb"
@@ -30,8 +27,6 @@ def apply_template!
   apply "lib/template.rb"
   apply "test/template.rb"
 
-  apply "variants/bootstrap/template.rb" if apply_bootstrap?
-
   git :init unless preexisting_git_repo?
   empty_directory ".git/safe"
 
@@ -40,10 +35,7 @@ def apply_template!
   create_initial_migration
   generate_spring_binstubs
 
-  binstubs = %w[
-    annotate brakeman bundler bundler-audit guard rubocop sidekiq
-    terminal-notifier
-  ]
+  binstubs = %w[ annotate brakeman bundler bundler-audit rubocop sidekiq ]
   run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
 
   template "rubocop.yml.tt", ".rubocop.yml"
@@ -51,7 +43,7 @@ def apply_template!
 
   unless any_local_git_commits?
     git add: "-A ."
-    git commit: "-n -m 'Set up project'"
+    git commit: "-n -m '🎬 Initial Commit'"
     if git_repo_specified?
       git remote: "add origin #{git_repo_url.shellescape}"
       git push: "-u origin --all"
@@ -73,7 +65,7 @@ def add_template_repository_to_source_path
     at_exit { FileUtils.remove_entry(tempdir) }
     git clone: [
       "--quiet",
-      "https://github.com/mattbrictson/rails-template.git",
+      "https://adamdawkins@bitbucket.org/dragondropdevelopment/dragons-on-rails.git",
       tempdir
     ].map(&:shellescape).join(" ")
 
@@ -96,24 +88,7 @@ def assert_minimum_rails_version
 end
 
 # Bail out if user has passed in contradictory generator options.
-def assert_valid_options
-  valid_options = {
-    skip_gemfile: false,
-    skip_bundle: false,
-    skip_git: false,
-    skip_system_test: false,
-    skip_test: false,
-    skip_test_unit: false,
-    edge: false
-  }
-  valid_options.each do |key, expected|
-    next unless options.key?(key)
-    actual = options[key]
-    unless actual == expected
-      fail Rails::Generators::Error, "Unsupported option: #{key}=#{actual}"
-    end
-  end
-end
+def assert_valid_options; end
 
 def assert_postgresql
   return if IO.read("Gemfile") =~ /^\s*gem ['"]pg['"]/
@@ -156,11 +131,6 @@ end
 
 def any_local_git_commits?
   system("git log &> /dev/null")
-end
-
-def apply_bootstrap?
-  ask_with_default("Use Bootstrap gems, layouts, views, etc.?", :blue, "no")\
-    =~ /^y(es)?/i
 end
 
 def run_with_clean_bundler_env(cmd)
