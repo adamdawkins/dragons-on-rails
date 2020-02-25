@@ -42,7 +42,6 @@ group :development do
   gem "guard-minitest", require: false
   gem "letter_opener"
   gem "listen"<%= gemfile_requirement("listen") %>
-  gem "overcommit", ">= 0.37.0", require: false
   gem "rack-livereload"
   gem "rubocop", ">= 0.80.0", require: false
   gem "rubocop-minitest", require: false
