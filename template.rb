@@ -33,7 +33,10 @@ def apply_template!
   create_initial_migration
   generate_spring_binstubs
 
-  binstubs = %w[brakeman bundler rubocop]
+  run_with_clean_bundler_env "bin/rails cucumber:install"
+  run_with_clean_bundler_env "bin/rails rspec:install"
+
+  binstubs = %w[brakeman bundler cucumber rubocop rspec]
   run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
 
   template "rubocop.yml.tt", ".rubocop.yml"
