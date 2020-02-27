@@ -8,6 +8,7 @@ def apply_template!
   assert_minimum_rails_version
   assert_valid_options
   assert_postgresql
+  ask_for_sidekiq
   add_template_repository_to_source_path
 
   template "Gemfile.tt", force: true
@@ -152,8 +153,14 @@ end
 
 def create_initial_migration
   return if Dir["db/migrate/**/*.rb"].any?
+
   run_with_clean_bundler_env "bin/rails generate migration initial_migration"
   run_with_clean_bundler_env "bin/rake db:migrate"
+end
+
+def ask_for_sidekiq
+  @include_sidekiq = yes?("Do you need to run any jobs in this project?"\
+                          "(e.g. send emails, backrgound imports)")
 end
 
 apply_template!
