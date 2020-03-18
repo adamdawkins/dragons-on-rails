@@ -30,12 +30,12 @@ def apply_template!
   empty_directory ".git/safe"
 
   run_with_clean_bundler_env "bin/setup"
-  run_with_clean_bundler_env "bin/rails webpacker:install"
+  run_with_clean_bundler_env "bundle exec rails webpacker:install"
   create_initial_migration
   generate_spring_binstubs
 
-  run_with_clean_bundler_env "bin/rails g cucumber:install"
-  run_with_clean_bundler_env "bin/rails g rspec:install"
+  run_with_clean_bundler_env "bundle exec rails g cucumber:install"
+  run_with_clean_bundler_env "bundle exec rails g rspec:install"
 
   binstubs = %w[brakeman bundler cucumber rubocop]
   run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
@@ -148,14 +148,14 @@ def run_with_clean_bundler_env(cmd)
 end
 
 def run_rubocop_autocorrections
-  run_with_clean_bundler_env "bin/rubocop -a --fail-level A > /dev/null || true"
+  run_with_clean_bundler_env "bundle exec rubocop -a --fail-level A > /dev/null || true"
 end
 
 def create_initial_migration
   return if Dir["db/migrate/**/*.rb"].any?
 
-  run_with_clean_bundler_env "bin/rails generate migration initial_migration"
-  run_with_clean_bundler_env "bin/rake db:migrate"
+  run_with_clean_bundler_env "bundle exec rails generate migration initial_migration"
+  run_with_clean_bundler_env "bundle exec rails db:migrate"
 end
 
 def ask_for_sidekiq
