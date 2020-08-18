@@ -1,42 +1,25 @@
 require: rubocop-rails
 
 AllCops:
-    Exclude:
-      - 'app/controllers/fake_mavenlink_invoices_controller.rb'
-      - 'bin/**/*'
-      - 'config.ru'
-      - 'config/**/*'
-      - 'db/**/*'
-      - 'features/support/env.rb'
-      - 'lib/**/*'
-      - 'node_modules/**/*'
-      - 'Rakefile'
-      - 'Guardfile'
-      - 'script/**/*'
-      - 'spec/factories/**/*'
-      - 'spec/rails_helper.rb'
-      - 'spec/spec_helper.rb'
-Metrics/LineLength:
-  Max: 80
+  NewCops: enable
+  DisplayCopNames: true
+  TargetRubyVersion: 2.6
   Exclude:
-    - 'features/**/*'
-Metrics/BlockLength:
-  Exclude:
-    - 'spec/**/*'
-Rails/SkipsModelValidations:
-  Whitelist:
-    - increment_counter
-Style/AccessModifierDeclarations:
-  EnforcedStyle: inline
-Style/AsciiComments: # Let the man shrug! ¯\_(ツ)_/¯
-  Enabled: False
+    - 'bin/**/*'
+    - 'config.ru'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'features/support/env.rb'
+    - 'lib/**/*'
+    - 'node_modules/**/*'
+    - 'Rakefile'
+    - 'Guardfile'
+    - 'script/**/*'
+    - 'spec/factories/**/*'
+    - 'spec/rails_helper.rb'
+    - 'spec/spec_helper.rb'
+
 Style/Documentation:
   Enabled: false
-Style/FrozenStringLiteralComment:
-  Enabled: true
-Style/Lambda:
-  EnforcedStyle: literal
 Style/StringLiterals:
   EnforcedStyle: double_quotes
-Style/SymbolArray:
-  Enabled: false
