@@ -157,6 +157,14 @@ Lint/UriEscapeUnescape:
 Lint/UselessAssignment:
   Enabled: true
 
+# ABC is a measure of complexity of a method. See https://en.wikipedia.org/wiki/ABC_Software_Metric
+Metrics/AbcSize:
+  Enabled: true
+
+# The number of different paths through a method
+Metrics/CyclomaticComplexity:
+  Enabled: true
+
 Performance/DeletePrefix:
   Enabled: true
 
