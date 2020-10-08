@@ -11,7 +11,7 @@ AllCops:
     - '**/tmp/**/*'
     - '**/vendor/**/*'
     - '**/node_modules/**/*'
-    - 'bin'
+    - 'bin/**/*'
 
 Performance:
   Exclude:
@@ -37,7 +37,6 @@ Layout/EmptyLineAfterMagicComment:
 
 Layout/EmptyLinesAroundAccessModifier:
   Enabled: true
-  EnforcedStyle: only_before
 
 Layout/EmptyLinesAroundBlockBody:
   Enabled: true
@@ -68,7 +67,6 @@ Layout/FirstArgumentIndentation:
 # extra level of indentation.
 Layout/IndentationConsistency:
   Enabled: true
-  EnforcedStyle: indented_internal_methods
 
 # Detect hard tabs, no hard tabs.
 Layout/IndentationStyle:
@@ -83,6 +81,11 @@ Layout/LeadingCommentSpace:
 
 Layout/LineLength:
   Max: 100
+  Exclude:
+    - 'Gemfile'
+    - 'config/initializers/**/*.rb'
+    - 'config/environments/**/*'
+    - 'db/migrate/**/*'
 
 Layout/SpaceAfterColon:
   Enabled: true
